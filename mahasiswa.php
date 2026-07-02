@@ -1,18 +1,7 @@
-<?php
-    
-    $koneksi = mysqli_connect("localhost", "root", "", "answeekly-bti");
-
+<?php 
+    require 'fungsi.php';
     $query = "SELECT * FROM mahasiswa";
-
-    $result = mysqli_query($koneksi, $query); ///lemari
-
-    /// ambil data (fetch) dari mahasiswa
-    
-
-    /// mysqli_fetch_row array numeric
-    /// mysqli_fetch_assoc array associative
-    /// mysqli_fetch_array array numeric/associative
-    /// mysqli_fetch_object
+    $mahasiswas = tampildata($query); /// wadah isi data
 
 ?>
 
@@ -61,11 +50,12 @@
         </tr>
 
         <?php 
-            while($mhs = mysqli_fetch_assoc($result))
+            $no = 1;
+            foreach($mahasiswas as $mhs)
             {
         ?>
         <tr>
-            <td>1</td>
+            <td><?= $no ?></td>
             <td><?php echo $mhs["nama"] ?></td>
             <td><?php echo $mhs["nim"] ?></td>
             <td><?= $mhs["prodi"] ?></td>
@@ -74,10 +64,11 @@
             <td><img src="images/<?= $mhs["foto"] ?>" width="60px"></td>
             <td>
                 <a href="editdata.php"><button>Edit</button></a> |
-                <a href="deletedata.php"><button>Hapus</button></a>
+                <a href="hapusdata.php?id=<?= $mhs["id"] ?>" onclick="return confirm('Yaqueeenn???')" ><button>Hapus</button></a>
             </td>
         </tr>
         <?php 
+            $no++;
             }
         ?>
     </table>
