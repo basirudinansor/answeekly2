@@ -25,5 +25,23 @@
         return mysqli_affected_rows($koneksi);
     }
 
+    function tambahdata($data)
+    {
+        global $koneksi;
+
+        $nama = htmlspecialchars($data["nama"]);
+        $nim = $data["nim"];
+        $prodi = $data["jurusan"];
+        $email = $data["email"];
+        $nohp = $data["nohp"];
+        $foto = $data["foto"];
+
+        $query = "INSERT INTO mahasiswa (nama,nim,prodi,email,no_hp,foto) VALUES ('$nama','$nim','$prodi','$email','$nohp','$foto')";
+        mysqli_query($koneksi, $query);
+
+        return mysqli_affected_rows($koneksi);
+
+    }
+
 
 ?>
